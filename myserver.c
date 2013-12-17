@@ -4,7 +4,7 @@
 
   Main DNS server file
 
-  Created by BILAL SHAUKAT GILL on 18/3/2013.
+  Created by BILAL SHAUKAT GILL on 18/12/2013.
 
 
  Note a lot of code is borrowed from here and there.
