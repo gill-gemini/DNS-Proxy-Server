@@ -16,7 +16,7 @@ User Instructions:
 At the moment ,only query type:A is supported in the implementation.If an alias name is found in the
 answer records, it is also sent to the client.
 To start the server.
-./server <desired port> <1=daemon /2=not daemon >
+./server "desired port" "1=daemon /2=not daemon"
 
 For example:
 For daemon
