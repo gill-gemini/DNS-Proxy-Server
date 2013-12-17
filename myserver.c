@@ -1,5 +1,21 @@
 /*****************************************************************************/
-/*** HTTP DNS SERVER  MAIN         						   ***/
+/*** HTTP DNS SERVER  MAIN         	
+/*
+
+  Main DNS server file
+
+  Created by BILAL SHAUKAT GILL on 18/3/2013.
+
+
+ Note a lot of code is borrowed from here and there.
+ 
+ Read the read me file for running the dns proxy server
+
+ 
+ */
+
+
+***/
 /*****************************************************************************/
 
 #include <stdio.h> //header for printf
