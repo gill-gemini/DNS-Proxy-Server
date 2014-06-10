@@ -1,19 +1,7 @@
 /*****************************************************************************/
-/*** HTTP DNS SERVER  MAIN         	
-/*
-
-  Main DNS server file
-
-  Created by BILAL SHAUKAT GILL on 18/12/2013.
-
-
- Note a lot of code is borrowed from here and there.
- 
- Read the read me file for running the dns proxy server
-
- 
- */
-
+/*** HTTP DNS SERVER  MAIN FILE                                            ***/
+/*** Bilal Shaukat Gill                                                    ***/
+/*** Student Id:280244         						   ***/
 /*****************************************************************************/
 
 #include <stdio.h> //header for printf
@@ -25,9 +13,9 @@
 #define SMALL 100
 #define MAXBUFI 5000
 
-
-
-static void daemonize(void)
+/*Creates a daemon, which works on the background.(static , so cant be acess by other c files)*/
+//static void daemonize(void)
+static void daemonize(char* directory)
 {
     /*pid data types represent process ids*/			
     pid_t pid, sid;
@@ -64,18 +52,14 @@ static void daemonize(void)
 
     // Change the current working directory.  This prevents the current
        //directory from being locked; hence not being able to remove it. 
-    if ((chdir("/u/16/gillb1/unix/Desktop/server_13/server_280244_bilalgill")) < 0) {
+    //if ((chdir("/u/16/gillb1/unix/Desktop/server_13/server_280244_bilalgill")) < 0) {/home/gill/Desktop/dns
+if ((chdir(directory)) < 0) {
         exit(EXIT_FAILURE);
     }
 }
 
-void sigchld_handler(int s)
-{
-	/*Wait for all dead processes.
-	 * We use a non-blocking call to be sure this signal handler will not
-	 * block if a child was cleaned up in another part of the program.*/ 
-	while(waitpid(-1, NULL, WNOHANG) > 0);
-}
+
+
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
@@ -87,43 +71,22 @@ void *get_in_addr(struct sockaddr *sa)
 	return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-/****************************************************************************
-Below is the Put part of the Server is implemented
-***************************************************************************/
-
-//if(buf[0]=='P')
-
-
-
-
-int main(int Count, char **Strings)
+/*Start listening in this function.This function deals with all the networking calls and starts the server*/
+int startserver(char **Strings)
 {
-	int z=0;
-	   z=atoi(Strings[2]);
-	if(z==1)
-	daemonize();
-	struct addrinfo hints,*ai,*p;	
-	struct sigaction sa;
-	struct sockaddr_storage clientaddr;	
 
-	int get,newfd,sockfd;
-	socklen_t addrlen;
-	char buf[MAXBUF];
-	char s[INET6_ADDRSTRLEN];
-	char sami[SMALL];
-	char buffer[MAXBUFI];
-	//Zero the whole structure before use with memset(). 
+
+	struct addrinfo hints,*ai,*p;	
+	int get,sockfd;
+	
 	memset(&hints,0,sizeof hints);
 	hints.ai_family=AF_UNSPEC;
 	//server can also have udp request
 	hints.ai_socktype=SOCK_STREAM;
 	hints.ai_flags=AI_PASSIVE;
-	addrlen=sizeof(clientaddr);
-	//Returns zero on success, or nonzero on error. If it returns nonzero, you can use the function gai_strerror() to get a printable version of the error code 		in the return value.ai==res	
-	//NULL is node parameter look in beej	
-	//stderr is standard error stream.default space for error messages	
-	printf("port over here is %s ", Strings[1]);
-	if(get=(getaddrinfo(NULL,Strings[1],&hints,&ai))!=0)
+	
+	get=(getaddrinfo(NULL,Strings[1],&hints,&ai));
+	if(get!=0)
 	{
 	fprintf(stderr,"selectserver:%s\n",gai_strerror(get));
 	exit(1);	
@@ -143,41 +106,42 @@ int main(int Count, char **Strings)
 		perror("setsockopt");
 		exit(1);
 		}	
-		//gives -1 on error(bind)
-		if(bind(sockfd,p->ai_addr,p->ai_addrlen)<0)
-		{
+		//gives -1 on error(bind)		
+		if (bind(sockfd,p->ai_addr,p->ai_addrlen)==0)		
+		break;
+		else{
 		close(sockfd);
 		continue;
-		}		
-		break;
-	}
-	if (p=NULL)
+		}	
+}
+	if (p==NULL)
 		{
 		fprintf(stderr,"selectserver:failed to bind\n");
 		exit(2);		
 		}	
 		//you must free addrinfo boy!
-		freeaddrinfo(ai);
-		//The listen function completes the binding necessary for a socket and creates a connection request queue for incoming requests.
-    		//here listner is the socket descriptor where we are listening and 10 is the max queue (back log)
+		freeaddrinfo(ai);	
 		
 	if(listen(sockfd,BACKLOG)==-1)
 		{
-		perror("listen");
+		perror("listen\n");
 		exit(3);		
 		}
-	//assign sig_child as our SigChild Handler	
-	sa.sa_handler=sigchld_handler;
-	//we dont want to block any other signals in this example	
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags=SA_RESTART;//restart functions if interrupted handlers
-	if(sigaction(SIGCHLD,&sa,NULL)==-1)
-		{
-		perror("sigaction");
-		exit(1);		
-		}
-	printf("server: waiting for connections...\n");
-	while(1)
+	
+return sockfd;
+}
+/*handle accept call and calls the required function for the put,get or post*/
+int handleconnections(int sockfd,char **Strings)
+{
+	int newfd;
+	char buf[MAXBUF];
+	char s[INET6_ADDRSTRLEN];
+	char sami[SMALL];
+	char buffer[MAXBUFI];
+	struct sockaddr_storage clientaddr;	
+	socklen_t addrlen;
+	addrlen=sizeof(clientaddr);
+while(1)
 		{//accepting connections
 		newfd=accept(sockfd,(struct sockaddr *)&clientaddr,&addrlen);		
 		//struct sockaddr_storage clientaddr;	
@@ -191,13 +155,14 @@ int main(int Count, char **Strings)
 		inet_ntop(clientaddr.ss_family,get_in_addr((struct sockaddr *)&clientaddr),s,sizeof s);
 		//inet_ntop(remoteaddr.ss_family,get_in_addr((struct sockaddr*)&remoteaddr),remoteIP, INET6_ADDRSTRLEN),newfd);
 		printf("server: got connection from %s\n", s);
-		int byte_count;		
+		//int byte_count;		
+		
 		if(!fork())
 		{
 			//this is a child process		
 			close(sockfd);
 			//sleep(20);					
-			byte_count = recv(newfd, buf, sizeof buf, 0);
+			recv(newfd, buf, sizeof buf, 0);
 			printf("buffer contains\n%s\n",buf);
 			//Checking for PUT			
 			if(buf[0]=='P' && buf[1]=='U' && buf[2]=='T')
@@ -212,7 +177,8 @@ int main(int Count, char **Strings)
 
 			else if (buf[0]=='P' && buf[1]=='O' && buf[2]=='S' && buf[3]=='T')
 			{
-			handle_post_request(buf,newfd);
+			int timeout=atoi(Strings[5]);						
+			handle_post_request(buf,newfd,Strings[4],timeout);
 			}
 			
 			else
@@ -230,11 +196,51 @@ int main(int Count, char **Strings)
 		memset(sami,'\0',SMALL);	
 		memset(buffer,'\0',MAXBUFI);
 	}//closing while(1)
-	
+
+return 1;
+}
+
+/*Main function call all the sub functions and handle signals*/
+int main(int Count, char **Strings)
+{
 		
+	int z=0;
+	   z=atoi(Strings[2]);
+	if(z==1)
+	daemonize(Strings[3]);
+	/*00000000000000000000000000*/
+	struct sigaction sa;
+	int sockfd;
+	sockfd=startserver(Strings);
+	//----->assign sig_child as our SigChild Handler	
+	sa.sa_handler=sigchld_handler;
+	//we dont want to block any other signals in this example	
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags=SA_RESTART;//restart functions if interrupted handlers
+	if(sigaction(SIGCHLD,&sa,NULL)==-1)
+		{
+		perror("sigaction");
+		exit(1);		
+		}
+	printf("server: waiting for connections...\n");
+	
+	/*Registering the server at nwprog1.netlab.hut.fi  */
+	int checkreg;	
+	checkreg=serverregister(Strings[1],1);
+	if(checkreg==0)
+	{
+	printf("Registeration/Degisteration done at nwprogserver\n");	
+	}
+	else
+	printf("server not registered\n");	
+	
+	signal(SIGINT, signal_callback_handler);
+        signal(SIGTSTP, signal_callback_handler);
+	signal(SIGPIPE,sig_pipe);
+
+	handleconnections(sockfd,Strings);	
 	return 0;
 
 }
-
 
 
