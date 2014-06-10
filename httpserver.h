@@ -27,6 +27,22 @@ int handle_get_request(char *buffer , int newfd);
 
 /*Server Post implementation.Contacts the DNS server for the result.
 Send backs the result to the client*/
-int handle_post_request(char *buffer,int newfd);
+int handle_post_request(char *,int, char *,int o );
+
+/*Registering the server at nwprog1.netlab.hut.fi  */
+int serverregister(char* port,int regis);
+
+/*Handle SIGINT AND SIGSTP Signals*/
+void signal_callback_handler(int signum);
+
+/*Sigchild Handler,waiting for all the zombies*/
+void sigchld_handler(int s);
+
+/*sigpipe handler*/
+void sig_pipe(int );
+
+/* Sends the response if file not found or timer expires at the lookup*/
+int filenotfound(int newfd);
+
 #endif
 

@@ -10,7 +10,8 @@
 #include<netinet/in.h>//AF_INET
 #include<string.h>//strcat
 #include<arpa/inet.h>
-#include"dnsquery.h"//function defined for dns query
+#include"httpserver.h"
+//#include"dnsquery.h"//function defined for dns query
 #define MAXBUF 5000
 #define DNS_V4 1
 
