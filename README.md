@@ -44,4 +44,4 @@ respond to the client with no answer.
 The response from the dns proxy server is saved in the “results.txt” file in the local directory of the
 httpclient implementation.You can see the results by using “nano results.txt”.
 Some of the results may also be seen in the terminal(first recv is printed on terminal)
-------------------------------------------------------------------------------------------------------------------------------------
+
