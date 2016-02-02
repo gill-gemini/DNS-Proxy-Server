@@ -1,4 +1,4 @@
-# DNS-Proxy-Server
+# DNS-Proxy Server
 
 HTTP DNS Proxy server serves the request of client asking for lookup for the domain names.The dns proxy server connects to the name server using UDP.The name server replies with answers to dns proxy server.Ultimately dns proxy server replies to the client using tcp.
 
