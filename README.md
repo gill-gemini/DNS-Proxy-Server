@@ -9,6 +9,7 @@ What did i Learned:
 2.Semaphores
 3.Processes
 4.Buffer Managment
+5.Socket Calls
 
 
 Build & Installation Instructions:
@@ -31,7 +32,7 @@ To start the server
 
 For example:
 
-For daemon
+For daemon(background process)
 ./server 2400 1 /Desktop/Dns 8.8.8.8 4
 
 For starting server without daemon for debugging purposes.
