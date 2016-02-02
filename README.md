@@ -3,11 +3,12 @@ DNS-Proxy-Server
 
 HTTP DNS Proxy server serves the request of client asking for lookup for the domain names.The dns proxy server connects to the name server using UDP.The name server replies with answers to dns proxy server.Ultimately dns proxy server replies to the client using tcp.
 
+-----------------------------------------------------------------------------------------------------------------------------------
 
 Build & Installation Instructions:
 
 Just write “make” in the terminal.
-
+-----------------------------------------------------------------------------------------------------------------------------------
 
 User Instructions:
 
@@ -18,7 +19,7 @@ To start the server.
  
 ./server (desired port) (1=daemon /2=not daemon) (directory of server) (ip address of name server) (timeout for the name server)
 
-
+-----------------------------------------------------------------------------------------------------------------------------------
 
 For example:
 
@@ -34,4 +35,4 @@ respond to the client with no answer.
 The response from the dns proxy server is saved in the “results.txt” file in the local directory of the
 httpclient implementation.You can see the results by using “nano results.txt”.
 Some of the results may also be seen in the terminal(first recv is printed on terminal)
-
+------------------------------------------------------------------------------------------------------------------------------------
