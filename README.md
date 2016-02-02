@@ -41,4 +41,4 @@ The response from the dns proxy server is saved in the “results.txt” file in
 
 PSY: 8.8.8.8 is a google name server , you can change it to some other name server as well
 
--![alt text] (http://giphy.com/gifs/oirLISmToyoeI "Frustrated cat can't believe this is the 12th time he's clicked on an auto-linked README.md URL")
+-![alt text] (http://i.imgur.com/WWLYo.gif "Frustrated cat can't believe this is the 12th time he's clicked on an auto-linked README.md URL")
