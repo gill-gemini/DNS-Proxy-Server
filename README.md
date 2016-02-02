@@ -28,10 +28,10 @@ answer records, it is also sent to the client.
 * For example:
 
 For daemon(background process)
-´./server 2400 1 /Desktop/Dns 8.8.8.8´
+* ´./server 2400 1 /Desktop/Dns 8.8.8.8´
 
 For starting server without daemon for debugging purposes.
-´./server 2400 2 /Desktop/Dns 8.8.8.8 4`
+* ´./server 2400 2 /Desktop/Dns 8.8.8.8 4`
 
 The server will send the query for the name server to the address mentioned in the terminal.In this case
 it will send it to 8.8.8.8.If there is no response from the name server , it will wait for 4 seconds and then
