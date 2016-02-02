@@ -40,5 +40,6 @@ respond to the client with no answer.
 The response from the dns proxy server is saved in the “results.txt” file in the local directory of the httpclient implementation.You can see the results by using “nano results.txt”.Some of the results may also be seen in the terminal(first recv is printed on terminal)
 
 PSY: 8.8.8.8 is a google name server , you can change it to some other name server as well
+![Diagram of models](https://git.niksula.hut.fi/sarekou1/wsd-game_store/raw/master/readme_images/diagram.svg)
 
--![alt text] (http://i.imgur.com/WWLYo.gif "Frustrated cat can't believe this is the 12th time he's clicked on an auto-linked README.md URL")
+//-![alt text] (http://i.imgur.com/WWLYo.gif "Frustrated cat can't believe this is the 12th time he's clicked on an auto-linked README.md URL")
