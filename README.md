@@ -12,7 +12,7 @@ HTTP DNS Proxy server serves the request of client asking for lookup for the dom
 
 ![Diagram of models](https://github.com/gill-gemini/DNS-Proxy-Server/blob/master/dnslookups.png)
 
-<a href="url"><img src="https://github.com/gill-gemini/DNS-Proxy-Server/blob/master/dnslookups.png="left" height="48" width="48" ></a>
+
 
 **Build & Installation Instructions:**
 
