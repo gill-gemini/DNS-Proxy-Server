@@ -3,23 +3,31 @@ DNS-Proxy-Server
 
 HTTP DNS Proxy server serves the request of client asking for lookup for the domain names.The dns proxy server connects to the name server using UDP.The name server replies with answers to dns proxy server.Ultimately dns proxy server replies to the client using tcp.
 
------------------------------------------------------------------------------------------------------------------------------------
+What did i Learned:
+-------------------
+1.Signal Handling
+2.Semaphores
+3.Processes
+4.Buffer Managment
+
 
 Build & Installation Instructions:
+----------------------------------
+Download the code.Just write “make” in the terminal.
 
-Just write “make” in the terminal.
------------------------------------------------------------------------------------------------------------------------------------
 
 User Instructions:
+------------------
 
 At the moment ,only query type:A is supported in the implementation.If an alias name is found in the
 answer records, it is also sent to the client.
 
-To start the server.
+To start the server
+-------------------
  
 ./server (desired port) (1=daemon /2=not daemon) (directory of server) (ip address of name server) (timeout for the name server)
 
------------------------------------------------------------------------------------------------------------------------------------
+
 
 For example:
 
