@@ -7,7 +7,7 @@ HTTP DNS Proxy server serves the request of client asking for lookup for the dom
 * 2.Semaphores
 * 3.Processes(Forking)
 * 4.Buffer Managment
-* 5.Socket Calls
+* 5.Server side (Socket Calls)
 
 
 **Build & Installation Instructions:**
