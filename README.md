@@ -37,6 +37,8 @@ For daemon(background process)
 For starting server without daemon for debugging purposes.
 * `./server 2400 2 /Desktop/Dns 8.8.8.8 4`
 
+For Directoy use "pwd" command , use that directory while starting the server.
+
 The server will send the query for the name server to the address mentioned in the terminal.In this case
 it will send it to 8.8.8.8.If there is no response from the name server , it will wait for 4 seconds and then
 respond to the client with no answer.
