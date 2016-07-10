@@ -224,15 +224,15 @@ int main(int Count, char **Strings)
 		}
 	printf("server: waiting for connections...\n");
 	
-	/*Registering the server at nwprog1.netlab.hut.fi  */
-	int checkreg;	
+	/*Registering the server at nwprog1.netlab.hut.fi--commented since server is not working  */
+/*	int checkreg;	
 	checkreg=serverregister(Strings[1],1);
 	if(checkreg==0)
 	{
 	printf("Registeration/Degisteration done at nwprogserver\n");	
 	}
 	else
-	printf("server not registered\n");	
+	printf("server not registered\n");	*/
 	
 	signal(SIGINT, signal_callback_handler);
         signal(SIGTSTP, signal_callback_handler);
